@@ -40,7 +40,7 @@
 
         <c:if test="${sessionScope.ongLogada ne null}">
             <script>
-                location.href = 'IndexOng.jsp';
+                location.href = 'indexOng.jsp';
             </script>
         </c:if>
 
@@ -52,12 +52,12 @@
             <form method="post" action="loginOngServlet">
                 <div class="form-group">
                     <label for="cnpj">CNPJ:</label>
-                    <input type="text" class="form-control" id="cnpj" placeholder="Digite o CNPJ" required>
+                    <input type="text" class="form-control" id="cnpj" name="cnpj" placeholder="Digite o CNPJ" required>
                 </div>
 
                 <div class="form-group">
                     <label for="senha">Senha:</label>
-                    <input type="password" class="form-control" id="senha" placeholder="Digite a senha" required>
+                    <input type="password" class="form-control" id="senha" name="senha" placeholder="Digite a senha" required>
                 </div>
 
                 <button type="submit" class="btn btn-primary btn-block">Entrar</button>

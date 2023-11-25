@@ -47,64 +47,29 @@ public class loginOngServlet extends HttpServlet {
             throws ServletException, IOException {
 
 
-
-
-        String op = request.getParameter("op");
-
-        if (op != null && op.equals("alteraSenha")) {
-
-            String atual = request.getParameter("atual");
-            String nova = request.getParameter("nova");
-            String confirma = request.getParameter("confirma");
-
-            Ong logada = (Ong) request.getSession().getAttribute("usuarioLogado"); 
-
-            if (!logada.getSenha().equals(atual)) {
-
-                request.getSession().setAttribute("msg", "A senha atual está incorreta!");
-                response.sendRedirect("perfil.jsp");
-                return;
-
-            }
-
-            if (!nova.equals(confirma)) {
-                request.getSession().setAttribute("msg", "A nova senha não bate com a confirmação!");
-                response.sendRedirect("perfil.jsp");
-                return;
-            }
-
-            logada.setSenha(nova);
-
-            RepositorioOng.update(logada); // Alteração: Repositório de ONGs utilizado para atualização
-
-            request.getSession().setAttribute("msg", "Senha alterada com sucesso!");
-            response.sendRedirect("perfil.jsp");
-
-            return;
-
-        }
-
         long cnpj = Long.parseLong(request.getParameter("cnpj"));
         String senha = request.getParameter("senha");
 
-        Ong ongLogada = RepositorioOng.realizarLogin(cnpj, senha);
-        if (ongLogada == null) {
+        Ong ong = RepositorioOng.realizarLogin(cnpj, senha);
+        
+        if (ong == null) {
 
             request.getSession().setAttribute("msg", "O login falhou!");
 
             response.sendRedirect("loginOng.jsp");
+             return;
 
-        } else {
+        } 
 
-            request.getSession().setAttribute("usuarioLogado", ongLogada);
+            request.getSession().setAttribute("ongLogada", ong);
 
-            List<Campanha> campanhas = RepositorioCampanha.readCampanha(ongLogada);
+            List<Campanha> campanhas = RepositorioCampanha.readCampanha(ong);
 
             request.getSession().setAttribute("campanhas", campanhas);
 
             response.sendRedirect("indexOng.jsp"); // Alteração: Redirecionamento para a página principal de ONG
 
-        }
+        
 
     }
 
