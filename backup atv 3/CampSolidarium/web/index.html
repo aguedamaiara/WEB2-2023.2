@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+         <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .logo-container {
+            text-align: center;
+            margin-top: 20px; /* Adicione espaço extra no topo */
+        }
+
+        .logo-container img {
+            width: 300px; /* Ajuste o tamanho conforme necessário */
+            height: auto;
+            margin: 10px; /* Espaçamento entre as imagens */
+            cursor: pointer;
+        }
+
+        .logo-ong img {
+            margin-top: 50px; /* Ajuste para a posição desejada mais para baixo */
+             width: 200px;
+        }
+    </style>
+</head>
+<body>
+    <div class="logo-container">
+        <!-- Imagem "Camp" no topo -->
+        <img src="img/camp.png" alt="Logo Camp" style="vertical-align: middle;">
+    </div>
+
+    <div class="logo-ong">
+        <!-- Imagem da ONG mais para baixo -->
+        <a href="loginOng.jsp">
+            <img src="img/ong.png" alt="Logo ONG" style="vertical-align: middle;">
+        </a>
+        
+        
+          <!-- Link página onde os usuários comuns poderiam ver as campanhas cadastradas -->
+          <!-- FALTA FAZER ESTE JSP -->
+        <a href="campanha.jsp">
+            <img src="img/emergencia.png" alt="Logo Emergencia" style="vertical-align: middle;">
+        </a>
+    </div>
+</body>
+</html>
