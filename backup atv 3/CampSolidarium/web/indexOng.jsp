@@ -47,29 +47,20 @@
         <h1>Bem Vindo ${sessionScope.ongLogada.login}</h1>
 
 
-        <h2>Campanhas Registradas</h2>
-
+        <blockquote>
+            <p>Caridade é ajudar ao próximo com o intuito de fazer a diferença no mundo. - <cite>Gislainne Sucupira</cite></p>
+        </blockquote>
+        
+        
         <c:forEach var="campanha" items="${sessionScope.campanhas}">
             <div>
                 <strong>Código:</strong> ${campanha.codigo}<br>
                 <strong>Data de Início:</strong> ${campanha.dataInicio}<br>
-                <strong>Data de Fim:</strong> ${campanha.dataFim}<br>
                 <strong>Objetivo:</strong> ${campanha.objetivo}<br>
-                <strong>Ativa:</strong> ${campanha.ativa ? 'Sim' : 'Não'}<br>
-                <strong>Localização:</strong> ${campanha.localizacao}<br>
-                <strong>Descrição:</strong> ${campanha.descricao}<br>
-<!--                <strong>Autor:</strong> ${campanha.autor.getNome()}<br>-->
-                <strong>ONG autora da campanha: </strong> ${campanha.autor != null ? campanha.autor.getNome() : 'Sem autor'}<br>
-
-
-                <strong>Insumos que a campanha precisa:</strong>
-                <c:forEach var="insumo" items="${campanha.insumos}">
-                    ${insumo.categoria}<br>
-                    <!-- Adicione mais campos conforme necessário -->
-                </c:forEach>
-                <!-- Adicione mais campos conforme necessário -->
                 
-                <strong>Tipo de Emergência:</strong> ${campanha.emergencia.tipo}<br>
+
+
+             
             </div>
             <hr>
         </c:forEach>

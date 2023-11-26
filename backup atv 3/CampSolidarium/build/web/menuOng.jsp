@@ -40,6 +40,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="campanha.jsp">Registrar uma Nova Campanha</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="vizualizarCampanhas.jsp">Ver detalhes das campanhas registradas</a>
+                    </li>
                   
                     <li class="nav-item">
                         <a class="nav-link" href="loginOngServlet?op=logout">Logout</a>
