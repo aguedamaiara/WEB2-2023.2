@@ -31,7 +31,7 @@
             <label for="descricao">Descrição:</label>
             <textarea name="descricao" id="descricao" rows="4"></textarea>
 
-   
+
             <fieldset>
                 <legend>Selecione os Insumos que a campanha precisa:</legend>
 
@@ -44,13 +44,24 @@
                 <!-- Adicione mais opções conforme necessário -->
             </fieldset>
 
+            <label for="tipoEmergencia">Selecione o tipo de Emergência que esta campanha quer ajudar:</label>
+            <select name="tipoEmergencia" required>
+                <option value="DESLIZAMENTO">Deslizamento</option>
+                <option value="ALAGAMENTO">Alagamento</option>
+                <option value="INCENDIO">Incêndio</option>
+                <option value="QUEIMADA">Queimada</option>
+                <option value="FURACAO">Furacão</option>
+              
+            </select>
+
+
 
             <!-- Adicione mais campos conforme necessário -->
 
             <!--         Botão de envio 
                     <input type="submit" value="Criar Campanha">-->
 
-            <button type="submit" value="Criar Campanha" >inserir campanha</button>
+            <button type="submit" value="Criar Campanha" >criar campanha</button>
 
         </form>
     </body>

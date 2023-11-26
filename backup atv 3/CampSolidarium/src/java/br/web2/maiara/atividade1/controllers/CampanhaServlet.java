@@ -6,6 +6,7 @@
 package br.web2.maiara.atividade1.controllers;
 
 import br.web2.maiara.atividade1.negocio.Campanha;
+import br.web2.maiara.atividade1.negocio.Emergencia;
 import br.web2.maiara.atividade1.negocio.Insumo;
 import br.web2.maiara.atividade1.negocio.Insumo.CategoriaInsumo;
 import br.web2.maiara.atividade1.negocio.Ong;
@@ -48,6 +49,13 @@ public class CampanhaServlet extends HttpServlet {
             String localizacao = request.getParameter("localizacao");
             String descricao = request.getParameter("descricao");
 
+            String tipoEmergenciaStr = request.getParameter("tipoEmergencia");
+            Emergencia.TipoEmergencia tipoEmergencia = Emergencia.TipoEmergencia.valueOf(tipoEmergenciaStr);
+
+            // criar uma instância de Emergencia e associar à campanha
+            Emergencia emergencia = new Emergencia();
+            emergencia.setTipo(tipoEmergencia);
+
             // Converta as datas de String para Date
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             java.util.Date dataInicio = dateFormat.parse(dataInicioStr);
@@ -61,6 +69,10 @@ public class CampanhaServlet extends HttpServlet {
             campanha.setAtiva(ativa);
             campanha.setLocalizacao(localizacao);
             campanha.setDescricao(descricao);
+            campanha.setTipoEmergencia(tipoEmergencia);
+
+            // configurar campos da emergencia
+            campanha.setEmergencia(emergencia);
 
             Ong autor = (Ong) request.getSession().getAttribute("ongLogada");
             campanha.setAutor(autor);
