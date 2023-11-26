@@ -31,6 +31,20 @@
             <label for="descricao">Descrição:</label>
             <textarea name="descricao" id="descricao" rows="4"></textarea>
 
+   
+            <fieldset>
+                <legend>Selecione os Insumos que a campanha precisa:</legend>
+
+                <label><input type="checkbox" name="insumos" value="ALIMENTO"> Alimento</label>
+                <label><input type="checkbox" name="insumos" value="VESTUARIO"> Vestuário</label>
+                <label><input type="checkbox" name="insumos" value="BRINQUEDO"> Brinquedo</label>
+                <label><input type="checkbox" name="insumos" value="MEDICAMENTOS"> Medicamentos</label>
+                <label><input type="checkbox" name="insumos" value="HIGIENE"> Higiene</label>
+                <label><input type="checkbox" name="insumos" value="MATERIAL_DE_CONSTRUCAO"> Material de Construção</label>
+                <!-- Adicione mais opções conforme necessário -->
+            </fieldset>
+
+
             <!-- Adicione mais campos conforme necessário -->
 
             <!--         Botão de envio 

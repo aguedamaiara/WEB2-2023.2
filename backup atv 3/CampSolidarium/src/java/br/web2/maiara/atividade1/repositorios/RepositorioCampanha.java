@@ -19,10 +19,9 @@ public class RepositorioCampanha {
 
     public static List<Campanha> campanhas = new ArrayList<>();
     private static int lastCampanha = 1;
-    private static int lastEmergencia = 1;
+    //private static int lastEmergencia = 1;
 
     public static List<Campanha> readCampanha(Ong ong) {
-        
         List<Campanha> leitura = new ArrayList<>();
 
         for (Campanha c : campanhas) {
@@ -37,6 +36,7 @@ public class RepositorioCampanha {
     public static void addCampanha(Campanha campanha) {
         campanha.setCodigo(lastCampanha++);
         Ong autor = campanha.getAutor();
+        
         if(autor!=null){
             campanha.setAutor(autor);
         }

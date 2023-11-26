@@ -6,11 +6,14 @@
 package br.web2.maiara.atividade1.controllers;
 
 import br.web2.maiara.atividade1.negocio.Campanha;
+import br.web2.maiara.atividade1.negocio.Insumo;
+import br.web2.maiara.atividade1.negocio.Insumo.CategoriaInsumo;
 import br.web2.maiara.atividade1.negocio.Ong;
 import br.web2.maiara.atividade1.repositorios.RepositorioCampanha;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -61,6 +64,24 @@ public class CampanhaServlet extends HttpServlet {
 
             Ong autor = (Ong) request.getSession().getAttribute("ongLogada");
             campanha.setAutor(autor);
+
+            // Processa os insumos selecionados
+            String[] insumosSelecionados = request.getParameterValues("insumos");
+
+            // Verifica se insumos foram selecionados
+            if (insumosSelecionados != null) {
+                List<Insumo> insumos = new ArrayList<>();
+
+                for (String categoria : insumosSelecionados) {
+                    // Aqui, você precisa criar uma instância de Insumo para cada categoria selecionada
+                    CategoriaInsumo categoriaInsumo = CategoriaInsumo.valueOf(categoria);
+                    Insumo insumo = new Insumo(); // Substitua com a construção correta do Insumo
+                    insumo.setCategoria(categoriaInsumo);
+                    insumos.add(insumo);
+                }
+
+                campanha.setInsumos(insumos);
+            }
 
             // Adiciona a campanha ao repositório de campanhas
             RepositorioCampanha.addCampanha(campanha);

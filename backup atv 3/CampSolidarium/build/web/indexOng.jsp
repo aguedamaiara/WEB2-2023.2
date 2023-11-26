@@ -61,6 +61,12 @@
 <!--                <strong>Autor:</strong> ${campanha.autor.getNome()}<br>-->
                 <strong>ONG autora da campanha: </strong> ${campanha.autor != null ? campanha.autor.getNome() : 'Sem autor'}<br>
 
+
+                <strong>Insumos:</strong>
+                <c:forEach var="insumo" items="${campanha.insumos}">
+                    ${insumo.categoria}<br>
+                    <!-- Adicione mais campos conforme necessário -->
+                </c:forEach>
                 <!-- Adicione mais campos conforme necessário -->
             </div>
             <hr>
