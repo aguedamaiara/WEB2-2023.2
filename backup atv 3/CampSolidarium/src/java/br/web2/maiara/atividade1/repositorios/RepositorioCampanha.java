@@ -7,6 +7,7 @@ package br.web2.maiara.atividade1.repositorios;
 
 import br.web2.maiara.atividade1.negocio.Campanha;
 import br.web2.maiara.atividade1.negocio.Ong;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,57 +17,28 @@ import java.util.List;
  */
 public class RepositorioCampanha {
 
-    public static List<Campanha> campanhas = null;
-
-    static {
-        campanhas = new ArrayList<>();
-    }
-
-    public static void creat(Campanha c) {
-        campanhas.add(c);
-    }
-
-    public static void update(Campanha c) {
-        for (Campanha cAux : campanhas) {
-            if (cAux.getCodigo() == c.getCodigo()) {
-                cAux.setDataInicio(c.getDataInicio());
-                cAux.setDataFim(c.getDataFim());
-                cAux.setObjetivo(c.getObjetivo());
-                cAux.setAtiva(c.isAtiva());
-                cAux.setLocalizacao(c.getLocalizacao());
-                cAux.setDescricao(c.getDescricao());
-                return;
-
-            }
-        }
-    }
-
-    public static Campanha read(int codigo) {
-        for (Campanha cAux : campanhas) {
-            if (cAux.getCodigo() == codigo) {
-                return cAux;
-            }
-        }
-        return null;
-    }
-
-    public static void delete(Campanha c) {
-        campanhas.remove(c);
-    }
-
-    public static List<Campanha> readAll() {
-        return campanhas;
-    }
+    public static List<Campanha> campanhas = new ArrayList<>();
+    private static int lastCampanha = 1;
+    private static int lastEmergencia = 1;
 
     public static List<Campanha> readCampanha(Ong ong) {
-
-        List<Campanha> leitura = new ArrayList();
+        
+        List<Campanha> leitura = new ArrayList<>();
 
         for (Campanha c : campanhas) {
-            if (c.getAutor().getCodigo() == ong.getCodigo()) {
+            if (c.getAutor() != null && c.getAutor().getCodigo() == ong.getCodigo()) {
                 leitura.add(c);
             }
         }
+
         return leitura;
     }
+
+    public static void addCampanha(Campanha campanha) {
+        campanha.setCodigo(lastCampanha++);
+        campanhas.add(campanha);
+    }
+
+
+
 }

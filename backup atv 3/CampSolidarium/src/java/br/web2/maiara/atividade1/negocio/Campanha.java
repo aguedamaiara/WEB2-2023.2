@@ -5,7 +5,9 @@
  */
 package br.web2.maiara.atividade1.negocio;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -20,7 +22,11 @@ public class Campanha {
     private boolean ativa;
     private String localizacao;
     private String descricao;
+
+    //referencias as outras classes
     private Ong autor;
+    private Emergencia emergencia;  // Adicionando referência à Emergencia
+    private List<Insumo> insumos;   // Adicionando lista de Insumo
 
     public int getCodigo() {
         return codigo;
@@ -38,6 +44,8 @@ public class Campanha {
         this.dataInicio = dataInicio;
     }
 
+
+    
     public Date getDataFim() {
         return dataFim;
     }
@@ -81,5 +89,24 @@ public class Campanha {
     public Ong getAutor() {
         return autor;
     }
+    
+     public void setAutor(Ong autor) {
+        this.autor = autor;
+    }
 
+    public Emergencia getEmergencia() {
+        return emergencia;
+    }
+
+    public void setEmergencia(Emergencia emergencia) {
+        this.emergencia = emergencia;
+    }
+
+    public List<Insumo> getInsumos() {
+        return insumos;
+    }
+
+    public void setInsumos(List<Insumo> insumos) {
+        this.insumos = insumos;
+    }
 }

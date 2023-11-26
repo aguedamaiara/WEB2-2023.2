@@ -102,8 +102,11 @@ public class OngServlet extends HttpServlet {
                 + login + ((operacao.equals("cadastro") ? "cadastrado " : "editado "))
                 + " com sucesso!");
 
-        response.sendRedirect("OngServlet");
+       // response.sendRedirect("OngServlet");
 
+        request.getSession().setAttribute("msg","Registro realizado com sucesso!");
+        
+        response.sendRedirect("loginOng.jsp");
     }
 
     @Override
