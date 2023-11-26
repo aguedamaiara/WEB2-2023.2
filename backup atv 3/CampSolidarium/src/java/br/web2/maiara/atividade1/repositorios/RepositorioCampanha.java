@@ -36,6 +36,10 @@ public class RepositorioCampanha {
 
     public static void addCampanha(Campanha campanha) {
         campanha.setCodigo(lastCampanha++);
+        Ong autor = campanha.getAutor();
+        if(autor!=null){
+            campanha.setAutor(autor);
+        }
         campanhas.add(campanha);
     }
 

@@ -5,6 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -56,6 +58,9 @@
                 <strong>Ativa:</strong> ${campanha.ativa ? 'Sim' : 'Não'}<br>
                 <strong>Localização:</strong> ${campanha.localizacao}<br>
                 <strong>Descrição:</strong> ${campanha.descricao}<br>
+<!--                <strong>Autor:</strong> ${campanha.autor.getNome()}<br>-->
+                <strong>ONG autora da campanha: </strong> ${campanha.autor != null ? campanha.autor.getNome() : 'Sem autor'}<br>
+
                 <!-- Adicione mais campos conforme necessário -->
             </div>
             <hr>
