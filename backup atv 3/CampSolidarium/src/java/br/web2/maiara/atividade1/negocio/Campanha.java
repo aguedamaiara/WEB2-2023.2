@@ -21,7 +21,9 @@ public class Campanha {
     private boolean ativa;
     private String localizacao;
     private String descricao;
-
+    private String dataInicioFormatada;
+    private String dataFimFormatada;
+    
     //referencias as outras classes
     private Ong autor;
     private Emergencia emergencia;  // Adicionando referência à Emergencia
@@ -99,6 +101,7 @@ public class Campanha {
     public void setEmergencia(Emergencia emergencia) {
         this.emergencia = emergencia;
     }
+
     public List<Insumo> getInsumos() {
         return insumos;
     }
@@ -106,8 +109,6 @@ public class Campanha {
     public void setInsumos(List<Insumo> insumos) {
         this.insumos = insumos;
     }
-    
-  
 
     public Emergencia.TipoEmergencia getTipoEmergencia() {
         return tipoEmergencia;
@@ -115,5 +116,21 @@ public class Campanha {
 
     public void setTipoEmergencia(Emergencia.TipoEmergencia tipoEmergencia) {
         this.tipoEmergencia = tipoEmergencia;
+    }
+
+    public String getDataInicioFormatada() {
+        return dataInicioFormatada;
+    }
+
+    public void setDataInicioFormatada(String dataInicioFormatada) {
+        this.dataInicioFormatada = dataInicioFormatada;
+    }
+
+    public String getDataFimFormatada() {
+        return dataFimFormatada;
+    }
+
+    public void setDataFimFormatada(String dataFimFormatada) {
+        this.dataFimFormatada = dataFimFormatada;
     }
 }

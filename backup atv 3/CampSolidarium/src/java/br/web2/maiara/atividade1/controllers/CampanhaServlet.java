@@ -48,7 +48,6 @@ public class CampanhaServlet extends HttpServlet {
             boolean ativa = request.getParameter("ativa") != null; // Se checkbox está marcada, será "on"
             String localizacao = request.getParameter("localizacao");
             String descricao = request.getParameter("descricao");
-
             String tipoEmergenciaStr = request.getParameter("tipoEmergencia");
             Emergencia.TipoEmergencia tipoEmergencia = Emergencia.TipoEmergencia.valueOf(tipoEmergenciaStr);
 
@@ -60,6 +59,8 @@ public class CampanhaServlet extends HttpServlet {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             java.util.Date dataInicio = dateFormat.parse(dataInicioStr);
             java.util.Date dataFim = dateFormat.parse(dataFimStr);
+
+     
 
             // Crie uma instância de Campanha
             Campanha campanha = new Campanha();
@@ -100,8 +101,17 @@ public class CampanhaServlet extends HttpServlet {
 
             // Envie a lista de campanhas para a página indexOng.jsp
             List<Campanha> campanhas = RepositorioCampanha.readCampanha(autor);
+            
+             // Formatando datas antes de enviar para a página JSP
+            SimpleDateFormat outputFormat = new SimpleDateFormat("dd/MM/yyyy");
+            for (Campanha c : campanhas) {
+                c.setDataInicioFormatada(outputFormat.format(c.getDataInicio()));
+                c.setDataFimFormatada(outputFormat.format(c.getDataFim()));
+            }
+            
+            
+            
             request.getSession().setAttribute("campanhas", campanhas);
-
             request.getSession().setAttribute("msg", "campanha cadastrada com sucesso!");
 
             // Redireciona para a página desejada (ajuste conforme sua estrutura de navegação)

@@ -54,7 +54,7 @@
         
         <c:forEach var="campanha" items="${sessionScope.campanhas}">
             <div>
-                <strong>Código:</strong> ${campanha.codigo}<br>
+           
                 <strong>Data de Início:</strong> ${campanha.dataInicio}<br>
                 <strong>Objetivo:</strong> ${campanha.objetivo}<br>
                 

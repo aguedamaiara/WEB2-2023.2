@@ -4,9 +4,8 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/agued/OneDrive/Documentos/NetBeansProjects/CampSolidarium/web/indexOng.jsp</file>
-            <file>file:/C:/Users/agued/OneDrive/Documentos/NetBeansProjects/CampSolidarium/web/campanha.jsp</file>
-            <file>file:/C:/Users/agued/OneDrive/Documentos/NetBeansProjects/CampSolidarium/src/java/br/web2/maiara/atividade1/controllers/CampanhaServlet.java</file>
-            <file>file:/C:/Users/agued/OneDrive/Documentos/NetBeansProjects/CampSolidarium/src/java/br/web2/maiara/atividade1/repositorios/RepositorioCampanha.java</file>
+            <file>file:/C:/Users/agued/OneDrive/Documentos/NetBeansProjects/CampSolidarium/web/vizualizarCampanhas.jsp</file>
+            <file>file:/C:/Users/agued/OneDrive/Documentos/NetBeansProjects/CampSolidarium/web/menuOng.jsp</file>
         </group>
     </open-files>
 </project-private>

@@ -7,9 +7,10 @@ package br.web2.maiara.atividade1.repositorios;
 
 import br.web2.maiara.atividade1.negocio.Campanha;
 import br.web2.maiara.atividade1.negocio.Ong;
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Collections;
+import java.util.Comparator;
 
 /**
  *
@@ -33,16 +34,23 @@ public class RepositorioCampanha {
         return leitura;
     }
 
+    public static List<Campanha> readCampanhaOrdenada() {
+        List<Campanha> campanhasOrdenadas = new ArrayList<>(campanhas);
+
+        // Ordenar as campanhas por data de cadastro (da mais recente para a mais antiga)
+        Collections.sort(campanhasOrdenadas, Comparator.comparing(Campanha::getDataInicio).reversed());
+
+        return campanhasOrdenadas;
+    }
+
     public static void addCampanha(Campanha campanha) {
         campanha.setCodigo(lastCampanha++);
         Ong autor = campanha.getAutor();
-        
-        if(autor!=null){
+
+        if (autor != null) {
             campanha.setAutor(autor);
         }
         campanhas.add(campanha);
     }
-
-
 
 }

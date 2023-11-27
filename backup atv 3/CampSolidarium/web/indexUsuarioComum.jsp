@@ -1,11 +1,17 @@
 <%-- 
-    Document   : indexOng
-    Created on : Nov 25, 2023, 7:38:25 AM
+    Document   : indexUsuarioComun.jsp
+    Created on : Nov 27, 2023, 9:27:14 AM
     Author     : agued
 --%>
 
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<%@page import="java.util.List"%>
+<%@page import="br.web2.maiara.atividade1.negocio.Campanha"%>
+<%@page import="br.web2.maiara.atividade1.repositorios.RepositorioCampanha"%>
+
 
 <!DOCTYPE html>
 <html>
@@ -43,24 +49,29 @@
     </head>
     <body>
 
-        <jsp:directive.include file="menuOng.jsp"/>
+        <jsp:directive.include file="menuUsuarioComum.jsp"/>
         <h1>Bem Vindo ${sessionScope.ongLogada.login}</h1>
-
-
         <blockquote>
             <p>Caridade é ajudar ao próximo com o intuito de fazer a diferença no mundo. - <cite>Gislainne Sucupira</cite></p>
         </blockquote>
-        
-        
-        <c:forEach var="campanha" items="${sessionScope.campanhas}">
+
+
+
+
+        <%
+            List<Campanha> campanhasOrdenadas = RepositorioCampanha.readCampanhaOrdenada();
+            request.setAttribute("campanhasOrdenadas", campanhasOrdenadas);
+
+            // Verifica se há campanhas para exibir
+            if (campanhasOrdenadas != null && !campanhasOrdenadas.isEmpty()) {
+        %>
+        <h2>Campanhas Registradas</h2>
+
+        <c:forEach var="campanha" items="${campanhasOrdenadas}">
             <div>
-           
+                <strong>Código:</strong> ${campanha.codigo}<br>
                 <strong>Data de Início:</strong> ${campanha.dataInicio}<br>
                 <strong>Objetivo:</strong> ${campanha.objetivo}<br>
-                
-
-
-             
             </div>
             <hr>
         </c:forEach>
@@ -70,7 +81,12 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
-
+        <%
+        } else {
+            // Caso não haja campanhas registradas pela ONG logada
+        %>
+        <p>Nenhuma campanha registrada pela ONG.</p>
+        <% }%>
 
     </body>
 </html>
