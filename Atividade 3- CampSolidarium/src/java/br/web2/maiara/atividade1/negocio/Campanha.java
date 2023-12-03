@@ -26,9 +26,9 @@ public class Campanha {
 
     //referencias as outras classes
     private Ong autor;
-    private Emergencia emergencia;  // Adicionando referência à Emergencia
+    private Emergencia emergencia;  
     private Emergencia.TipoEmergencia tipoEmergencia;
-    private List<Insumo> insumos;   // Adicionando lista de Insumo
+    private List<Insumo> insumos;  
 
     public int getCodigo() {
         return codigo;

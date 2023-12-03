@@ -39,12 +39,11 @@ public class EmergenciaServlet extends HttpServlet {
                 request.getRequestDispatcher("/emergencia.jsp").forward(request, response);
 
             } else {
-                // Verifica se a operação é de editar, se sim, encaminha para /editarEmergencia.jsp
-                // caso contrário, encaminha para /emergencia.jsp
+               
                 if (operacao == null || !operacao.equals("editar")) {
                     request.getRequestDispatcher("/emergencia.jsp").forward(request, response);
                 } else {
-                    request.setAttribute("emergencia", emergencia); // Adiciona a Emergência como atributo de solicitação
+                    request.setAttribute("emergencia", emergencia); 
                     request.getRequestDispatcher("/editarEmergencia.jsp").forward(request, response);
                 }
             }

@@ -10,11 +10,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Login de ONG</title>
-
-        <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-
-        <!-- Estilos customizados -->
         <style>
             body {
                 background-color: #f8f9fa;
@@ -44,15 +40,12 @@
             </script>
         </c:if>
 
-
-
-
         <div class="card">
             <h2 class="text-center mb-4">Login de ONG</h2>
-            
+
             <h4><i>${sessionScope.msg}</i></h4>
             <c:remove var="msg" scope="session"/>
-            
+
             <form method="post" action="loginOngServlet">
                 <div class="form-group">
                     <label for="cnpj">CNPJ:</label>
@@ -68,18 +61,16 @@
             </form>
 
             <div class="text-center mt-3">
-                <!-- Adicionando modal de registro -->
                 <button type="button" class="btn btn-link" data-toggle="modal" data-target="#registroModal">
                     Ainda não possui uma conta? Registrar-se
                 </button>
             </div>
 
             <div class="text-center mt-3">                
-                <a  class="btn btn-link" href="index.html"> Ou volte para a Home e vejas as campanhas registradas</a><br/>
+                <a  class="btn btn-link" href="index.html"> Ou volte para a Home e veja as campanhas registradas</a><br/>
             </div>
         </div>
 
-        <!-- Modal de Registro -->
         <div class="modal fade" id="registroModal" tabindex="-1" role="dialog" aria-labelledby="registroModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -92,8 +83,6 @@
                     <div class="modal-body">
                         <%@ include file="cadastroOng.jsp" %>
                     </div>
-
-
                 </div>
             </div>
         </div>

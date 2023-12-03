@@ -6,9 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page import="java.text.SimpleDateFormat" %>
-
 <%@page import="java.util.List"%>
 <%@page import="br.web2.maiara.atividade1.negocio.Campanha"%>
 <%@page import="br.web2.maiara.atividade1.repositorios.RepositorioCampanha"%>
@@ -20,7 +18,6 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
 
-        <!-- Adicione os links do Bootstrap abaixo -->
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
@@ -63,9 +60,7 @@
                             <strong>Insumos que a campanha precisa:</strong>
                             <c:forEach var="insumo" items="${campanha.insumos}">
                                 ${insumo.categoria}<br>
-                                <!-- Adicione mais campos conforme necessário -->
                             </c:forEach>
-                            <!-- Adicione mais campos conforme necessário -->
 
                             <strong>Tipo de Emergência:</strong> ${campanha.emergencia.tipo}<br>
                         </div>

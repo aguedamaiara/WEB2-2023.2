@@ -19,11 +19,7 @@
     <body>
 
         <c:if test="${sessionScope.ongLogada eq null}">
-            <!--        <script>
-                        location.href='loginOng.jsp';
-                    </script>-->
             <c:redirect url="loginOng.jsp"/>
-
         </c:if>
 
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -43,7 +39,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="vizualizarCampanhas.jsp">Ver detalhes das campanhas registradas</a>
                     </li>
-                  
+
                     <li class="nav-item">
                         <a class="nav-link" href="loginOngServlet?op=logout">Logout</a>
                     </li>

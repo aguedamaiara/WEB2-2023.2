@@ -59,10 +59,7 @@
                             <strong>Insumos que a campanha precisa:</strong>
                             <c:forEach var="insumo" items="${campanha.insumos}">
                                 ${insumo.categoria}<br>
-                                <!-- Adicione mais campos conforme necessário -->
                             </c:forEach>
-                            <!-- Adicione mais campos conforme necessário -->
-
                             <strong>Tipo de Emergência:</strong> ${campanha.emergencia.tipo}<br>
                         </div>
                     </div>

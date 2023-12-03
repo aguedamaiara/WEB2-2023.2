@@ -45,7 +45,7 @@ public class InsumoServlet extends HttpServlet {
                 if (operacao == null || !operacao.equals("editar")) {
                     request.getRequestDispatcher("/insumo.jsp").forward(request, response);
                 } else {
-                    request.setAttribute("insumo", insumo); // Adiciona o Insumo como atributo de solicitação
+                    request.setAttribute("insumo", insumo);
                     request.getRequestDispatcher("/editarInsumo.jsp").forward(request, response);
                 }
             }

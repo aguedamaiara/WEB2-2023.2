@@ -20,7 +20,6 @@ public class RepositorioCampanha {
 
     public static List<Campanha> campanhas = new ArrayList<>();
     private static int lastCampanha = 1;
-    //private static int lastEmergencia = 1;
 
     public static List<Campanha> readCampanha(Ong ong) {
         List<Campanha> leitura = new ArrayList<>();
@@ -36,12 +35,7 @@ public class RepositorioCampanha {
 
     public static List<Campanha> readCampanhaOrdenada() {
         List<Campanha> campanhasOrdenadas = new ArrayList<>(campanhas);
-
-//        // Ordenar as campanhas por data de cadastro (da mais recente para a mais antiga)
-//        Collections.sort(campanhasOrdenadas, Comparator.comparing(Campanha::getDataInicio).reversed());
-// Ordenar as campanhas pelo código (da maior para a menor)
         Collections.sort(campanhasOrdenadas, Comparator.comparingInt(Campanha::getCodigo).reversed());
-
         return campanhasOrdenadas;
     }
 

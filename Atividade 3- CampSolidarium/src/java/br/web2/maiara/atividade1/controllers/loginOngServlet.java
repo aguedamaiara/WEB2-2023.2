@@ -28,67 +28,47 @@ public class loginOngServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//
-//        request.getSession().removeAttribute("ongLogada");
-//
-//        response.sendRedirect("loginOng.jsp");
 
         String op = request.getParameter("op");
 
         if (op != null && op.equals("logout")) {
-            request.getSession().invalidate(); 
+            request.getSession().invalidate();
             response.sendRedirect("loginOng.jsp");
             return;
         }
     }
 
-        /**
-         * Handles the HTTP <code>POST</code> method.
-         *
-         * @param request servlet request
-         * @param response servlet response
-         * @throws ServletException if a servlet-specific error occurs
-         * @throws IOException if an I/O error occurs
-         */
-        @Override
-        protected void doPost
-        (HttpServletRequest request, HttpServletResponse response)
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-            long cnpj = Long.parseLong(request.getParameter("cnpj"));
-            String senha = request.getParameter("senha");
+        long cnpj = Long.parseLong(request.getParameter("cnpj"));
+        String senha = request.getParameter("senha");
 
-            Ong ong = RepositorioOng.realizarLogin(cnpj, senha);
+        Ong ong = RepositorioOng.realizarLogin(cnpj, senha);
 
-            if (ong == null) {
+        if (ong == null) {
 
-                request.getSession().setAttribute("msg", "O login falhou!");
+            request.getSession().setAttribute("msg", "O login falhou!");
 
-                response.sendRedirect("loginOng.jsp");
-                return;
-
-            }
-
-            request.getSession().setAttribute("ongLogada", ong);
-
-            List<Campanha> campanhas = RepositorioCampanha.readCampanha(ong);
-
-            request.getSession().setAttribute("campanhas", campanhas);
-
-            response.sendRedirect("indexOng.jsp"); // Alteração: Redirecionamento para a página principal de ONG
+            response.sendRedirect("loginOng.jsp");
+            return;
 
         }
 
-        /**
-         * Returns a short description of the servlet.
-         *
-         * @return a String containing servlet description
-         */
-        @Override
-        public String getServletInfo
-        
-            () {
-        return "Short description";
-        }// </editor-fold>
+        request.getSession().setAttribute("ongLogada", ong);
+
+        List<Campanha> campanhas = RepositorioCampanha.readCampanha(ong);
+
+        request.getSession().setAttribute("campanhas", campanhas);
+
+        response.sendRedirect("indexOng.jsp");
 
     }
+
+    @Override
+    public String getServletInfo() {
+        return "Short description";
+    }// </editor-fold>
+
+}

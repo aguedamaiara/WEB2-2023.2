@@ -12,15 +12,11 @@
 <%@page import="br.web2.maiara.atividade1.negocio.Campanha"%>
 <%@page import="br.web2.maiara.atividade1.repositorios.RepositorioCampanha"%>
 
-
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-
-        <!-- Estilos customizados -->
         <style>
             body {
                 background-color: #f8f9fa;
@@ -51,13 +47,7 @@
 
         <jsp:directive.include file="menuUsuarioComum.jsp"/>
         <h1>Bem Vindo ${sessionScope.ongLogada.login}</h1>
-        <blockquote>
-            <p>Caridade é ajudar ao próximo com o intuito de fazer a diferença no mundo. - <cite>Gislainne Sucupira</cite></p>
-        </blockquote>
-
-
-
-
+ 
         <%
             List<Campanha> campanhasOrdenadas = RepositorioCampanha.readCampanhaOrdenada();
             request.setAttribute("campanhasOrdenadas", campanhasOrdenadas);
@@ -75,8 +65,6 @@
             </div>
             <hr>
         </c:forEach>
-
-        <!-- Bootstrap JS e jQuery (opcional) -->
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>

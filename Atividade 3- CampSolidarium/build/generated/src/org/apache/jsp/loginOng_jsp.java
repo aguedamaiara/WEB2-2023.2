@@ -68,11 +68,7 @@ public final class loginOng_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("    <head>\n");
       out.write("        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\n");
       out.write("        <title>Login de ONG</title>\n");
-      out.write("\n");
-      out.write("        <!-- Bootstrap CSS -->\n");
       out.write("        <link rel=\"stylesheet\" href=\"https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css\">\n");
-      out.write("\n");
-      out.write("        <!-- Estilos customizados -->\n");
       out.write("        <style>\n");
       out.write("            body {\n");
       out.write("                background-color: #f8f9fa;\n");
@@ -101,9 +97,6 @@ public final class loginOng_jsp extends org.apache.jasper.runtime.HttpJspBase
         return;
       out.write("\n");
       out.write("\n");
-      out.write("\n");
-      out.write("\n");
-      out.write("\n");
       out.write("        <div class=\"card\">\n");
       out.write("            <h2 class=\"text-center mb-4\">Login de ONG</h2>\n");
       out.write("            \n");
@@ -130,7 +123,6 @@ public final class loginOng_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("            </form>\n");
       out.write("\n");
       out.write("            <div class=\"text-center mt-3\">\n");
-      out.write("                <!-- Adicionando modal de registro -->\n");
       out.write("                <button type=\"button\" class=\"btn btn-link\" data-toggle=\"modal\" data-target=\"#registroModal\">\n");
       out.write("                    Ainda não possui uma conta? Registrar-se\n");
       out.write("                </button>\n");
@@ -141,7 +133,6 @@ public final class loginOng_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("            </div>\n");
       out.write("        </div>\n");
       out.write("\n");
-      out.write("        <!-- Modal de Registro -->\n");
       out.write("        <div class=\"modal fade\" id=\"registroModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"registroModalLabel\" aria-hidden=\"true\">\n");
       out.write("            <div class=\"modal-dialog\" role=\"document\">\n");
       out.write("                <div class=\"modal-content\">\n");
@@ -180,8 +171,6 @@ public final class loginOng_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("</html>");
       out.write("\n");
       out.write("                    </div>\n");
-      out.write("\n");
-      out.write("\n");
       out.write("                </div>\n");
       out.write("            </div>\n");
       out.write("        </div>\n");

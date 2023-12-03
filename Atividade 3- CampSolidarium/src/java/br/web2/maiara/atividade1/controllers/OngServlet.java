@@ -45,12 +45,11 @@ public class OngServlet extends HttpServlet {
                         .forward(request, response);
 
             } else {
-                // Verifica se a operação é de editar, se sim, encaminha para /editarOng.jsp
-                // caso contrário, encaminha para /ongs.jsp
+                
                 if (operacao == null || !operacao.equals("editar")) {
                     request.getRequestDispatcher("/ongs.jsp").forward(request, response);
                 } else {
-                    request.setAttribute("ong", o); // Adiciona a ONG como atributo de solicitação
+                    request.setAttribute("ong", o); 
                     request.getRequestDispatcher("/editarOng.jsp").forward(request, response);
                 }
             }
@@ -101,8 +100,6 @@ public class OngServlet extends HttpServlet {
         session.setAttribute("msg", "Ong "
                 + login + ((operacao.equals("cadastro") ? "cadastrado " : "editado "))
                 + " com sucesso!");
-
-       // response.sendRedirect("OngServlet");
 
         request.getSession().setAttribute("msg","Registro realizado com sucesso!");
         
