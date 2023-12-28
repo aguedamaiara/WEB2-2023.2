@@ -4,7 +4,7 @@ public class TipoSorvete {
 
 	private int codigo;
     private String tipo;
-    private int quantBolas;
+    private int quantBolas;//LIMITE
     private double peso;
     private String descricao;
     private double valor;
