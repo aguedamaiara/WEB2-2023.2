@@ -112,15 +112,16 @@ public class SorveteRepository implements Repository<Sorvete> {
         java.sql.Date dataCompra = result.getDate("dataCompra");
         int tipoSorveteCodigo = result.getInt("tipoSorvete_codigo");
 
-        Sorvete sorvete = new Sorvete(codigo, dataCompra);
-
+        // Supondo que você tenha uma instância de TipoSorvete disponível
         TipoSorvete tipoSorvete = RepositoryService.getInstance().readTipoSorvete(tipoSorveteCodigo);
-        sorvete.setTipoSorvete(tipoSorvete);
+
+        Sorvete sorvete = new Sorvete(codigo, dataCompra, new ArrayList<>(), tipoSorvete);
 
         List<Sabor> sabores = readAllSaboresPorSorvete(codigo);
         sorvete.getSabores().addAll(sabores);
 
         return sorvete;
     }
+
 }
 

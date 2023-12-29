@@ -24,6 +24,11 @@ public class SorveteController {
                 return ResponseEntity.badRequest().body("Número de sabores excede o limite permitido para o tipo de sorvete.");
             }
 
+            // Adicionar sabores ao sorvete
+            for (Sabor sabor : sorvete.getSabores()) {
+                sorvete.addSabor(sabor);
+            }
+
             RepositoryService.getInstance().createSorvete(sorvete);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (SQLException e) {

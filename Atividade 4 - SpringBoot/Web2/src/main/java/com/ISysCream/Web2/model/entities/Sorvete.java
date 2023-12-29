@@ -12,12 +12,13 @@ public class Sorvete {
 	private List<Sabor> sabores;
 	private TipoSorvete tipoSorvete;
 
-	public Sorvete(int codigo, Date dataCompra) {
+	public Sorvete(int codigo, Date dataCompra, List<Sabor> sabores, TipoSorvete tipoSorvete) {
 		super();
 		Codigo = codigo;
 		this.dataCompra = dataCompra;
 		this.sabores = new ArrayList<>();
-		this.tipoSorvete = tipoSorvete;
+		// Adiciona os sabores fornecidos ao construtor à lista de sabores
+		this.sabores.addAll(sabores);
 	}
 
 	public int getCodigo() {
@@ -41,7 +42,13 @@ public class Sorvete {
 	}
 
 	public void addSabor(Sabor sabor) {
-		this.sabores.add(sabor);
+		// Verificar se o número de sabores não excede o limite permitido para o tipo de sorvete
+		if (sabores.size() < tipoSorvete.getQuantBolas()) {
+			this.sabores.add(sabor);
+		} else {
+			// Lançar uma exceção ou tomar outra ação apropriada se exceder o limite
+			throw new IllegalArgumentException("Número de sabores excede o limite permitido para o tipo de sorvete.");
+		}
 	}
 
 	public TipoSorvete getTipoSorvete() {
