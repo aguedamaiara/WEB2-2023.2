@@ -3,6 +3,7 @@ package com.ISysCream.Web2.repositories;
 import com.ISysCream.Web2.model.entities.Sabor;
 import com.ISysCream.Web2.model.entities.Sorvete;
 import com.ISysCream.Web2.model.entities.TipoSorvete;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 import java.sql.Date;
@@ -58,39 +59,59 @@ public class SorveteRepository implements Repository<Sorvete> {
 
     @Override
     public void update(Sorvete sorvete) throws SQLException {
+        // Atualiza a data e o tipo de sorvete
+        String updateSorveteSql = "UPDATE sorvete SET dataCompra = ?, codigo_tipoSorvete = ? WHERE codigo = ?";
 
-        try {
-            // Remove os sabores associados ao sorvete
-            String deleteSaboresSql = "DELETE FROM associacao_sabor_sorvete WHERE codigo_sorvete = ?";
-            try (PreparedStatement pstmDeleteSabores = ConnectionManager.getCurrentConnection().prepareStatement(deleteSaboresSql)) {
-                pstmDeleteSabores.setInt(1, sorvete.getCodigo());
-                pstmDeleteSabores.execute();
-            }
+        try (PreparedStatement pstm = ConnectionManager.getCurrentConnection().prepareStatement(updateSorveteSql)) {
+            pstm.setDate(1, sorvete.getDataCompra());
+            pstm.setInt(2, sorvete.getTipoSorvete().getCodigo());
+            pstm.setInt(3, sorvete.getCodigo());
+            pstm.execute();
+        }
 
-            // Atualiza a data e o tipo de sorvete
-            String updateSorveteSql = "UPDATE sorvete SET dataCompra = ?, codigo_tipoSorvete = ? WHERE codigo = ?";
-            try (PreparedStatement pstm = ConnectionManager.getCurrentConnection().prepareStatement(updateSorveteSql)) {
-                pstm.setDate(1, sorvete.getDataCompra());
-                pstm.setInt(2, sorvete.getTipoSorvete().getCodigo());
-                pstm.setInt(3, sorvete.getCodigo());
-                pstm.execute();
-            }
+        // Remove os sabores associados ao sorvete
+        String deleteSaboresSql = "DELETE FROM associacao_sabor_sorvete WHERE codigo_sorvete = ?";
 
-            // Adiciona novamente os sabores atualizados
-            String addSaboresSql = "INSERT INTO associacao_sabor_sorvete (codigo_sorvete, codigo_sabor, quantidade) VALUES (?, ?, ?)";
-            try (PreparedStatement pstmAddSabores = ConnectionManager.getCurrentConnection().prepareStatement(addSaboresSql)) {
-                for (Sabor sabor : sorvete.getSabores()) {
-                    pstmAddSabores.setInt(1, sorvete.getCodigo());
-                    pstmAddSabores.setInt(2, sabor.getCodigo());
-                    pstmAddSabores.setInt(3, sabor.getQuantidade()); // Adicione a quantidade aqui
-                    pstmAddSabores.execute();
-                }
+        try (PreparedStatement pstmDeleteSabores = ConnectionManager.getCurrentConnection().prepareStatement(deleteSaboresSql)) {
+            pstmDeleteSabores.setInt(1, sorvete.getCodigo());
+            pstmDeleteSabores.execute();
+        }
+
+        // Adiciona novamente os sabores atualizados
+        String addSaboresSql = "INSERT INTO associacao_sabor_sorvete (codigo_sorvete, codigo_sabor, quantidade) VALUES (?, ?, ?)";
+
+        try (PreparedStatement pstmAddSabores = ConnectionManager.getCurrentConnection().prepareStatement(addSaboresSql)) {
+            for (Sabor sabor : sorvete.getSabores()) {
+                pstmAddSabores.setInt(1, sorvete.getCodigo());
+                pstmAddSabores.setInt(2, sabor.getCodigo());
+                pstmAddSabores.setInt(3, sabor.getQuantidade());
+                pstmAddSabores.execute();
             }
-        } catch (SQLException e) {
-            // Trate exceções, faça log ou propague a exceção conforme necessário
-            throw e;
+        }
+
+        // Após a atualização, faça uma nova consulta para obter o estado atualizado
+        Sorvete sorveteAtualizado = read(sorvete.getCodigo());
+        if (sorveteAtualizado != null) {
+            // Converta o objeto Sorvete para JSON e retorne na resposta
+            String jsonAtualizado = convertSorveteToJson(sorveteAtualizado);
+            // Retorne a resposta com o JSON atualizado
+        } else {
+            // Trate o caso em que o sorvete não pôde ser recuperado após a atualização
+            throw new SQLException("Falha ao obter o sorvete atualizado após a atualização.");
         }
     }
+
+    // Método auxiliar para converter o objeto Sorvete para JSON
+    private String convertSorveteToJson(Sorvete sorvete) {
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            return objectMapper.writeValueAsString(sorvete);
+        } catch (Exception e) {
+            // Trate a exceção conforme necessário
+            e.printStackTrace();
+            return null;
+        }    }
+
 
     @Override
     public Sorvete read(int codigo) throws SQLException {
