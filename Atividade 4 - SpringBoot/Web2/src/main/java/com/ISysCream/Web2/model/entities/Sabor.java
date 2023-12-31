@@ -4,14 +4,18 @@ public class Sabor {
     private int codigo;
     private String nome;
     private String descricao;
+    private int quantidade; // Adicionado campo quantidade
 
-    
+
+
     public Sabor(int codigo, String nome, String descricao) {
 		super();
 		this.codigo = codigo;
 		this.nome = nome;
 		this.descricao = descricao;
-	}
+        this.quantidade = 1; // Valor padrão para quantidade
+
+    }
 
 	// getters and setters
     public int getCodigo() {
@@ -36,5 +40,13 @@ public class Sabor {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    public int getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
     }
 }

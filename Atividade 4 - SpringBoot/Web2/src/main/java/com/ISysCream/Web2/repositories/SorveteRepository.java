@@ -26,31 +26,69 @@ public class SorveteRepository implements Repository<Sorvete> {
 
             // Adiciona os sabores do sorvete
             for (Sabor sabor : sorvete.getSabores()) {
-                adicionarSaborAoSorvete(sorvete.getCodigo(), sabor.getCodigo());
+                adicionarSaborAoSorvete(sorvete.getCodigo(), sabor);
             }
         }
     }
 
     // Método auxiliar para adicionar sabores ao sorvete
-    private void adicionarSaborAoSorvete(int codigoSorvete, int codigoSabor) throws SQLException {
-        String sql = "INSERT INTO associacao_sabor_sorvete (codigo_sorvete, codigo_sabor) VALUES (?, ?)";
+    private void adicionarSaborAoSorvete(int codigoSorvete, Sabor sabor) throws SQLException {
+        String sql = "INSERT INTO associacao_sabor_sorvete (codigo_sorvete, codigo_sabor, quantidade) VALUES (?, ?, ?)";
 
         try (PreparedStatement pstm = ConnectionManager.getCurrentConnection().prepareStatement(sql)) {
             pstm.setInt(1, codigoSorvete);
-            pstm.setInt(2, codigoSabor);
+            pstm.setInt(2, sabor.getCodigo());
+            pstm.setInt(3, sabor.getQuantidade());
             pstm.execute();
         }
     }
 
+//    @Override
+//    public void update(Sorvete sorvete) throws SQLException {
+//        String sql = "UPDATE sorvete SET dataCompra = ?, codigo_tipoSorvete = ? WHERE codigo = ?";
+//
+//        try (PreparedStatement pstm = ConnectionManager.getCurrentConnection().prepareStatement(sql)) {
+//            pstm.setDate(1, sorvete.getDataCompra());
+//            pstm.setInt(2, sorvete.getTipoSorvete().getCodigo()); // Use getTipoSorvete().getCodigo()
+//            pstm.setInt(3, sorvete.getCodigo());
+//            pstm.execute();
+//        }
+//    }
+
+
     @Override
     public void update(Sorvete sorvete) throws SQLException {
-        String sql = "UPDATE sorvete SET dataCompra = ?, tipoSorvete = ? WHERE codigo = ?";
 
-        try (PreparedStatement pstm = ConnectionManager.getCurrentConnection().prepareStatement(sql)) {
-            pstm.setDate(1, sorvete.getDataCompra());
-            pstm.setString(2, sorvete.getTipoSorvete().toString());
-            pstm.setInt(3, sorvete.getCodigo());
-            pstm.execute();
+        try {
+            // Remove os sabores associados ao sorvete
+            String deleteSaboresSql = "DELETE FROM associacao_sabor_sorvete WHERE codigo_sorvete = ?";
+            try (PreparedStatement pstmDeleteSabores = ConnectionManager.getCurrentConnection().prepareStatement(deleteSaboresSql)) {
+                pstmDeleteSabores.setInt(1, sorvete.getCodigo());
+                pstmDeleteSabores.execute();
+            }
+
+            // Atualiza a data e o tipo de sorvete
+            String updateSorveteSql = "UPDATE sorvete SET dataCompra = ?, codigo_tipoSorvete = ? WHERE codigo = ?";
+            try (PreparedStatement pstm = ConnectionManager.getCurrentConnection().prepareStatement(updateSorveteSql)) {
+                pstm.setDate(1, sorvete.getDataCompra());
+                pstm.setInt(2, sorvete.getTipoSorvete().getCodigo());
+                pstm.setInt(3, sorvete.getCodigo());
+                pstm.execute();
+            }
+
+            // Adiciona novamente os sabores atualizados
+            String addSaboresSql = "INSERT INTO associacao_sabor_sorvete (codigo_sorvete, codigo_sabor, quantidade) VALUES (?, ?, ?)";
+            try (PreparedStatement pstmAddSabores = ConnectionManager.getCurrentConnection().prepareStatement(addSaboresSql)) {
+                for (Sabor sabor : sorvete.getSabores()) {
+                    pstmAddSabores.setInt(1, sorvete.getCodigo());
+                    pstmAddSabores.setInt(2, sabor.getCodigo());
+                    pstmAddSabores.setInt(3, sabor.getQuantidade()); // Adicione a quantidade aqui
+                    pstmAddSabores.execute();
+                }
+            }
+        } catch (SQLException e) {
+            // Trate exceções, faça log ou propague a exceção conforme necessário
+            throw e;
         }
     }
 
