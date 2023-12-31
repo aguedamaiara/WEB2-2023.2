@@ -1,5 +1,8 @@
 package com.ISysCream.Web2.model.entities;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 public class TipoSorvete {
 
 	private int codigo;
@@ -56,6 +59,15 @@ public class TipoSorvete {
 	public void setValor(double valor) {
 		this.valor = valor;
 	}
-    
-    
+
+	public static TipoSorvete extractTipoSorveteFromResultSet(ResultSet result) throws SQLException {
+		int codigo = result.getInt("codigo");
+		String tipo = result.getString("tipo");
+		int quantBolas = result.getInt("quantBolas");
+		double peso = result.getDouble("peso");
+		String descricao = result.getString("descricao");
+		double valor = result.getDouble("valor");
+
+		return new TipoSorvete(codigo, tipo, quantBolas, peso, descricao, valor);
+	}
 }

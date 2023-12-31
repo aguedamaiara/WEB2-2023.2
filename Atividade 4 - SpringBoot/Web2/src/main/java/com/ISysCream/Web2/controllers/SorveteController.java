@@ -1,6 +1,5 @@
 package com.ISysCream.Web2.controllers;
 
-import com.ISysCream.Web2.model.entities.Sabor;
 import com.ISysCream.Web2.model.entities.Sorvete;
 import com.ISysCream.Web2.repositories.RepositoryService;
 import org.springframework.http.HttpStatus;
@@ -19,21 +18,11 @@ public class SorveteController {
     @PostMapping
     public ResponseEntity<?> create(@RequestBody Sorvete sorvete) {
         try {
-            // Verificar se o número de sabores excede o limite definido para o tipo de sorvete
-            if (sorvete.getTipoSorvete().getQuantBolas() < sorvete.getSabores().size()) {
-                return ResponseEntity.badRequest().body("Número de sabores excede o limite permitido para o tipo de sorvete.");
-            }
-
-            // Adicionar sabores ao sorvete
-            for (Sabor sabor : sorvete.getSabores()) {
-                sorvete.addSabor(sabor);
-            }
-
             RepositoryService.getInstance().createSorvete(sorvete);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error creating sorvete", e);
         }
     }
 
@@ -80,4 +69,6 @@ public class SorveteController {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+
 }
