@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ice Cream Types</title>
+    <!-- Add Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+    <a href="dono.html"><button type="submit" class="btn btn-primary">Voltar</button></a>
+
+
+
+    <div class="container">
+        <h2 class="text-center">Tipos de Sorvete Cadastrados</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Type</th>
+                    <th>Quantity of Balls</th>
+                    <th>Weight</th>
+                    <th>Description</th>
+                    <th>Value</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="iceCreamTable">
+                <!-- Ice cream types will be inserted here by JavaScript -->
+            </tbody>
+        </table>
+    </div>
+    <div class="container">
+        <h2>Edit Ice Cream Type</h2>
+        <div id="successMessage" class="alert alert-success" style="display: none;">
+            <p id="successMessageText"></p>
+        </div>
+        
+         
+        <form>
+            <input type="hidden" id="codigo">
+            <div class="form-group">
+                <label for="tipo">Type</label>
+                <input type="text" class="form-control" id="tipo">
+            </div>
+            <div class="form-group">
+                <label for="quantBolas">Quantity of Balls</label>
+                <input type="number" class="form-control" id="quantBolas">
+            </div>
+            <div class="form-group">
+                <label for="peso">Weight</label>
+                <input type="number" class="form-control" id="peso">
+            </div>
+            <div class="form-group">
+                <label for="descricao">Description</label>
+                <input type="text" class="form-control" id="descricao">
+            </div>
+            <div class="form-group">
+                <label for="valor">Value</label>
+                <input type="number" class="form-control" id="valor">
+            </div>
+            <button type="button" class="btn btn-primary" onclick="saveItem()">Save</button>
+        </form>
+    </div>
+    
+    <script src="TiposSorvete.js"></script>
+</body>
+</html>
