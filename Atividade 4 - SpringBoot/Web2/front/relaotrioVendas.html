@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatório de Vendas Diárias</title>
+</head>
+<body>
+    <h1>Relatório de Vendas Diárias</h1>
+    
+    <div id="relatorio"></div>
+
+    <button onclick="consultarRelatorio()">Consultar</button>
+
+    <script>
+      function consultarRelatorio() {
+    // Faça uma requisição à API (pode ser usando fetch ou outra biblioteca como axios)
+    fetch('http://localhost:8080/sorvete/relatorio-vendas-diarias')
+        .then(response => response.json())
+        .then(data => {
+            // Processar os dados e exibir no elemento #relatorio
+            exibirRelatorio(data);
+        })
+        .catch(error => console.error('Erro ao consultar o relatório:', error));
+}
+
+function exibirRelatorio(data) {
+    const relatorioElement = document.getElementById('relatorio');
+
+    // Limpar conteúdo anterior
+    relatorioElement.innerHTML = '';
+
+    // Verificar se há dados no relatório
+    if (data.length === 0) {
+        relatorioElement.innerHTML = '<p>Nenhum dado disponível.</p>';
+        return;
+    }
+
+    // Criar uma tabela para exibir os resultados
+    const tabela = document.createElement('table');
+    tabela.innerHTML = `
+        <thead>
+            <tr>
+                <th>Data</th>
+                <th>Total Sorvetes</th>
+                <th>Tipo de Sorvete</th>
+                <th>Sabor</th>
+                <th>Quantidade Vendida</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Os dados serão preenchidos aqui -->
+        </tbody>
+    `;
+
+    // Preencher os dados na tabela
+    const tbody = tabela.querySelector('tbody');
+    data.forEach(item => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${item.data}</td>
+            <td>${item.totalSorvetes}</td>
+            <td>${item.tipoSorvete}</td>
+            <td>${item.sabor}</td>
+            <td>${item.quantidadeVendida}</td>
+        `;
+        tbody.appendChild(row);
+    });
+
+    // Adicionar tabela ao elemento #relatorio
+    relatorioElement.appendChild(tabela);
+}
+
+    </script>
+</body>
+</html>

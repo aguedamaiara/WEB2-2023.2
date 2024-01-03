@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Criador de Sorvetes</title>
+  <style>
+    /* Adicione estilos conforme necessário */
+  </style>
+</head>
+<body>
+  <div id="step1">
+    <h2>Passo 1: Escolha o tipo de sorvete</h2>
+    <select id="tipoSorvete">
+      <option value="casquinha">Casquinha</option>
+      <option value="copo">Copo</option>
+    </select>
+    <button onclick="proximoPasso()">Próximo</button>
+  </div>
+
+  <div id="step2" style="display: none;">
+    <h2>Passo 2: Escolha os sabores</h2>
+    <label>
+      <input type="checkbox" name="sabor" value="morango"> Morango
+    </label>
+    <label>
+      <input type="checkbox" name="sabor" value="chocolate"> Chocolate
+    </label>
+    <label>
+      <input type="checkbox" name="sabor" value="baunilha"> Baunilha
+    </label>
+    <button onclick="proximoPasso()">Próximo</button>
+  </div>
+
+  <div id="step3" style="display: none;">
+    <h2>Passo 3: Confirme sua escolha</h2>
+    <p id="tipoEscolhido"></p>
+    <p id="saboresEscolhidos"></p>
+    <button onclick="confirmarEscolha()">Confirmar</button>
+  </div>
+
+  <script>
+    let tipoSorveteSelecionado = '';
+    let saboresSelecionados = [];
+
+    function proximoPasso() {
+      if (document.getElementById('step1').style.display !== 'none') {
+        tipoSorveteSelecionado = document.getElementById('tipoSorvete').value;
+        document.getElementById('step1').style.display = 'none';
+        document.getElementById('step2').style.display = 'block';
+        
+      } else if (document.getElementById('step2').style.display !== 'none') {
+        const checkboxes = document.getElementsByName('sabor');
+        saboresSelecionados = Array.from(checkboxes)
+          .filter(checkbox => checkbox.checked)
+          .map(checkbox => checkbox.value);
+        document.getElementById('step2').style.display = 'none';
+        document.getElementById('step3').style.display = 'block';
+        exibirEscolhas();
+      }
+    }
+
+    function exibirEscolhas() {
+      document.getElementById('tipoEscolhido').innerText = `Tipo de sorvete: ${tipoSorveteSelecionado}`;
+      document.getElementById('saboresEscolhidos').innerText = `Sabores escolhidos: ${saboresSelecionados.join(', ')}`;
+    }
+
+    function confirmarEscolha() {
+      alert('Sorvete criado com sucesso!\nTipo: ' + tipoSorveteSelecionado + '\nSabores: ' + saboresSelecionados.join(', '));
+      // Aqui você pode adicionar lógica adicional, como enviar as escolhas para um servidor, etc.
+      // Por enquanto, vamos apenas reiniciar o processo.
+      reiniciarProcesso();
+    }
+
+    function reiniciarProcesso() {
+      tipoSorveteSelecionado = '';
+      saboresSelecionados = [];
+      document.getElementById('tipoSorvete').value = 'casquinha';
+      const checkboxes = document.getElementsByName('sabor');
+      checkboxes.forEach(checkbox => checkbox.checked = false);
+      document.getElementById('step3').style.display = 'none';
+      document.getElementById('step1').style.display = 'block';
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Sorvetes Cadastrados</title>
+    <!-- Adicione os links para o Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+    <div class="container mt-5">
+        <a href="criarSorvete.html" class="btn btn-primary">Voltar</a>
+
+        <h2 class="text-center">Sorvetes Cadastrados</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Data de Compra</th>
+                    <th>Tipo de Sorvete</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody id="sorveteTable">
+                <!-- Sorvetes serão inseridos aqui pelo JavaScript -->
+            </tbody>
+        </table>
+    </div>
+
+    <div class="container">
+        <h2>Editar Sorvete</h2>
+        <div id="successMessage" class="alert alert-success" style="display: none;">
+            <p id="successMessageText"></p>
+        </div>
+
+        <form>
+            <input type="hidden" id="codigo">
+            <div class="form-group">
+                <label for="dataCompra">Data de Compra</label>
+                <input type="date" class="form-control" id="dataCompra">
+            </div>
+            <div class="form-group">
+                <label for="tipoSorvete">Tipo de Sorvete</label>
+                <input type="text" class="form-control" id="tipoSorvete">
+            </div>
+            <button type="button" class="btn btn-primary" onclick="saveSorvete()">Salvar</button>
+        </form>
+    </div>
+
+    <!-- Adicione o script do Bootstrap, jQuery e seu script JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="Sorvetes.js"></script>
+</body>
+</html>

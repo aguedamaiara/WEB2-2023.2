@@ -70,4 +70,20 @@ public class TipoSorveteController {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @GetMapping("/{codigo}/quantBolas")
+    public ResponseEntity<Integer> getQuantBolas(@PathVariable("codigo") int codigo) {
+        try {
+            TipoSorvete tipoSorvete = RepositoryService.getInstance().readTipoSorvete(codigo);
+            if (tipoSorvete != null) {
+                return new ResponseEntity<>(tipoSorvete.getQuantBolas(), HttpStatus.OK);
+            } else {
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 }

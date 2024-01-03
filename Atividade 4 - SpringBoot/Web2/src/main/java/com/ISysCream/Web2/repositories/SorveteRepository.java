@@ -6,10 +6,7 @@ import com.ISysCream.Web2.model.entities.TipoSorvete;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,22 +14,44 @@ public class SorveteRepository implements Repository<Sorvete> {
 
     @Override
     public void create(Sorvete sorvete) throws SQLException {
-        String sql = "INSERT INTO sorvete (codigo, dataCompra, codigo_tipoSorvete) VALUES (?, ?, ?)";
-
-        try (PreparedStatement pstm = ConnectionManager.getCurrentConnection().prepareStatement(sql)) {
-            pstm.setInt(1, sorvete.getCodigo());
-            pstm.setDate(2, sorvete.getDataCompra());
-            pstm.setInt(3, sorvete.getTipoSorvete().getCodigo()); // Use o código do tipo de sorvete aqui
+//        String sql = "INSERT INTO sorvete (codigo, dataCompra, codigo_tipoSorvete) VALUES (?, ?, ?)";
+//
+//        try (PreparedStatement pstm = ConnectionManager.getCurrentConnection().prepareStatement(sql)) {
+//            pstm.setInt(1, sorvete.getCodigo());
+//            pstm.setDate(2, sorvete.getDataCompra());
+//            pstm.setInt(3, sorvete.getTipoSorvete().getCodigo()); // Use o código do tipo de sorvete aqui
+//            pstm.execute();
+//
+//            // Adiciona os sabores do sorvete
+//            for (Sabor sabor : sorvete.getSabores()) {
+//                adicionarSaborAoSorvete(sorvete.getCodigo(), sabor);
+//            }
+//        }
+//    }
+        String sql = "INSERT INTO sorvete (dataCompra, codigo_tipoSorvete) VALUES (?, ?)";
+        try (PreparedStatement pstm = ConnectionManager.getCurrentConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            pstm.setDate(1, sorvete.getDataCompra());
+            pstm.setInt(2, sorvete.getTipoSorvete().getCodigo());
             pstm.execute();
 
-            // Adiciona os sabores do sorvete
-            for (Sabor sabor : sorvete.getSabores()) {
-                adicionarSaborAoSorvete(sorvete.getCodigo(), sabor);
+            // Obtenha o código do sorvete gerado
+            try (ResultSet generatedKeys = pstm.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    int codigoSorvete = generatedKeys.getInt(1);
+
+                    // Adicione os sabores do sorvete
+                    for (Sabor sabor : sorvete.getSabores()) {
+                        adicionarSaborAoSorvete(codigoSorvete, sabor);
+                    }
+                } else {
+                    throw new SQLException("Falha ao obter o código gerado para o sorvete.");
+                }
             }
         }
     }
 
-    // Método auxiliar para adicionar sabores ao sorvete
+
+        // Método auxiliar para adicionar sabores ao sorvete
     private void adicionarSaborAoSorvete(int codigoSorvete, Sabor sabor) throws SQLException {
         String sql = "INSERT INTO associacao_sabor_sorvete (codigo_sorvete, codigo_sabor, quantidade) VALUES (?, ?, ?)";
 
@@ -132,6 +151,8 @@ public class SorveteRepository implements Repository<Sorvete> {
 
     @Override
     public void delete(int codigo) throws SQLException {
+        // Antes de excluir o sorvete, exclua as associações correspondentes
+        deleteAssociacoesSaborSorvete(codigo);
         String sql = "DELETE FROM sorvete WHERE codigo = ?";
 
         try (PreparedStatement pstm = ConnectionManager.getCurrentConnection().prepareStatement(sql)) {
@@ -140,6 +161,15 @@ public class SorveteRepository implements Repository<Sorvete> {
         }
     }
 
+    // Método auxiliar para excluir as associações de sabor do sorvete
+    private void deleteAssociacoesSaborSorvete(int codigoSorvete) throws SQLException {
+        String deleteAssociacoesSql = "DELETE FROM associacao_sabor_sorvete WHERE codigo_sorvete = ?";
+
+        try (PreparedStatement pstm = ConnectionManager.getCurrentConnection().prepareStatement(deleteAssociacoesSql)) {
+            pstm.setInt(1, codigoSorvete);
+            pstm.execute();
+        }
+    }
     @Override
     public List<Sorvete> readAll() throws SQLException {
         String sql = "SELECT * FROM sorvete JOIN tipoSorvete ON sorvete.codigo_tipoSorvete = tipoSorvete.codigo";

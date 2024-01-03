@@ -1,33 +1,29 @@
 window.onload = function () {
-    fetch('http://localhost:8080/tipoSorvete')
+    fetch('http://localhost:8080/sabor')
         .then(response => response.json())
         .then(data => populateTable(data))
         .catch(error => console.error('Error:', error));
 };
 
 function populateTable(data) {
-    const table = document.getElementById('iceCreamTable');
+    const table = document.getElementById('saborTable');
 
     data.forEach(item => {
         const row = table.insertRow();
-        row.insertCell().innerHTML = item.tipo;
-        row.insertCell().innerHTML = item.quantBolas;
-        row.insertCell().innerHTML = item.peso;
+        row.insertCell().innerHTML = item.codigo;
+        row.insertCell().innerHTML = item.nome;
         row.insertCell().innerHTML = item.descricao;
-        row.insertCell().innerHTML = item.valor;
         row.insertCell().innerHTML = `<button onclick="editItem(${item.codigo})">Edit</button> <button onclick="deleteItem(${item.codigo})">Delete</button>`;
     });
 }
+
 function editItem(codigo) {
-    fetch(`http://localhost:8080/tipoSorvete/${codigo}`)
+    fetch(`http://localhost:8080/sabor/${codigo}`)
         .then(response => response.json())
         .then(data => {
             // Assuming you have form fields with these IDs
-            document.getElementById('tipo').value = data.tipo;
-            document.getElementById('quantBolas').value = data.quantBolas;
-            document.getElementById('peso').value = data.peso;
+            document.getElementById('nome').value = data.nome;
             document.getElementById('descricao').value = data.descricao;
-            document.getElementById('valor').value = data.valor;
             document.getElementById('codigo').value = data.codigo; // Hidden field
         })
         .catch(error => console.error('Error:', error));
@@ -35,15 +31,12 @@ function editItem(codigo) {
 
 function saveItem() {
     const item = {
-        tipo: document.getElementById('tipo').value,
-        quantBolas: document.getElementById('quantBolas').value,
-        peso: document.getElementById('peso').value,
+        nome: document.getElementById('nome').value,
         descricao: document.getElementById('descricao').value,
-        valor: document.getElementById('valor').value,
         codigo: document.getElementById('codigo').value // Hidden field
     };
 
-    fetch('http://localhost:8080/tipoSorvete', {
+    fetch('http://localhost:8080/sabor', {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -63,15 +56,11 @@ function saveItem() {
             document.getElementById('successMessage').style.display = 'block';
 
             // Clear form fields
-            document.getElementById('tipo').value = '';
-            document.getElementById('quantBolas').value = '';
-            document.getElementById('peso').value = '';
+            document.getElementById('nome').value = '';
             document.getElementById('descricao').value = '';
-            document.getElementById('valor').value = '';
             document.getElementById('codigo').value = ''; // Hidden field
 
             refreshTable();
-
         })
         .catch((error) => {
             console.error('Error:', error);
@@ -79,7 +68,7 @@ function saveItem() {
 }
 
 function deleteItem(codigo) {
-    fetch(`http://localhost:8080/tipoSorvete/${codigo}`, {
+    fetch(`http://localhost:8080/sabor/${codigo}`, {
         method: 'DELETE',
     })
         .then(response => {
@@ -104,13 +93,12 @@ function deleteItem(codigo) {
 
 function refreshTable() {
     // Clear the existing table rows
-    const table = document.getElementById('iceCreamTable');
+    const table = document.getElementById('saborTable');
     table.innerHTML = '';
 
     // Fetch the updated data and repopulate the table
-    fetch('http://localhost:8080/tipoSorvete')
+    fetch('http://localhost:8080/sabor')
         .then(response => response.json())
         .then(data => populateTable(data))
         .catch(error => console.error('Error:', error));
 }
-

@@ -69,6 +69,16 @@ public class SorveteController {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+//    @GetMapping("/relatorio-vendas-diarias")
+//    public ResponseEntity<List<RelatorioVendasDiariasDTO>> relatorioVendasDiarias() {
+//        try {
+//            List<RelatorioVendasDiariasDTO> relatorio = RepositoryService.getInstance().gerarRelatorioVendasDiarias();
+//            return new ResponseEntity<>(relatorio, HttpStatus.OK);
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
+//        }
+//    }
 
 
 }
