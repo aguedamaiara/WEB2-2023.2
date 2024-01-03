@@ -1,5 +1,6 @@
 package com.ISysCream.Web2.repositories;
 
+import com.ISysCream.Web2.model.entities.RelatorioVendas;
 import com.ISysCream.Web2.model.entities.Sabor;
 import com.ISysCream.Web2.model.entities.Sorvete;
 import com.ISysCream.Web2.model.entities.TipoSorvete;
