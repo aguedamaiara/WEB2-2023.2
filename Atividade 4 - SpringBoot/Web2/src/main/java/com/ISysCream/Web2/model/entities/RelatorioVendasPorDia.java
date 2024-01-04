@@ -10,7 +10,6 @@ public class RelatorioVendasPorDia {
         this.quantidadeVendida = quantidadeVendida;
     }
 
-    // Getters e setters (pode ser gerado automaticamente em muitas IDEs)
 
     public String getDia() {
         return dia;

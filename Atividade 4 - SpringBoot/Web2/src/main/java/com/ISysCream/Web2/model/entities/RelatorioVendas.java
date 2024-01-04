@@ -9,7 +9,6 @@ public class RelatorioVendas {
         this.quantidadeVendida = quantidadeVendida;
     }
 
-    // Getters e setters (pode ser gerado automaticamente em muitas IDEs)
 
     public String getSabor() {
         return sabor;

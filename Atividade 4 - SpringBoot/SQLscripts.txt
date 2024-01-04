@@ -1,0 +1,35 @@
+CREATE DATABASE isyscream;
+
+USE isyscream;
+
+CREATE TABLE Sabor (
+ codigo INTEGER PRIMARY KEY AUTO_INCREMENT,
+ nome VARCHAR(255),
+ descricao VARCHAR(255)
+);
+
+CREATE TABLE TipoSorvete (
+ codigo INTEGER PRIMARY KEY AUTO_INCREMENT,
+ tipo VARCHAR(255),
+ quantBolas INTEGER,
+ peso DOUBLE,
+ descricao VARCHAR(255),
+ valor DOUBLE
+);
+
+CREATE TABLE Sorvete (
+ codigo INTEGER PRIMARY KEY AUTO_INCREMENT,
+ dataCompra DATE,
+ FOREIGN KEY (codigo_tipoSorvete) REFERENCES TipoSorvete(codigo);
+);
+
+CREATE TABLE Associacao_Sabor_Sorvete (
+ codigo_sabor INTEGER NOT NULL,
+ codigo_sorvete INTEGER NOT NULL,
+ quantidade INTEGER DEFAULT 1,
+ PRIMARY KEY (codigo_sabor, codigo_sorvete),
+ CONSTRAINT fk_codigo_sorvete 
+	FOREIGN KEY (codigo_sorvete) 
+	REFERENCES sorvete(codigo) 
+	ON DELETE CASCADE
+);

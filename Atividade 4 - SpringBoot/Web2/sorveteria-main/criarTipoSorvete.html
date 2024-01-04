@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create New TipoSorvete</title>
+
+    
+    <!--Importando CSS3-->
+    <link rel="stylesheet" href="./css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./css/fontawesome.css" />
+    <link rel="stylesheet" href="./css/animate.css" />
+    <link rel="stylesheet" href="./css/main.css" />
+    <link rel="stylesheet" href="./css/responsivo.css" />
+</head>
+<body>
+
+
+    <a href="dono.html"><button type="submit" class="btn btn-primary">Voltar</button></a>
+    <a href="TiposSorvete.html"><button class="btn btn-primary" >Gerencie seus Tipos de Sorvete</button></a>
+
+    
+
+    <div class="modal-body">
+
+
+        <h2 class="text-center">Crie um novo tipo</h2>
+
+                <!-- Formulário para criar um novo tipo -->
+                <form id="sorveteForm">
+                    <div class="form-group">
+                        <label for="tipo">Tipo:</label>
+                        <input type="text" class="form-control" id="tipo" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="quantBolas">Quantidade de Bolas:</label>
+                        <input type="number" class="form-control" id="quantBolas" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="peso">Peso:</label>
+                        <input type="number" class="form-control" id="peso" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="descricao">Descrição:</label>
+                        <textarea class="form-control" id="descricao" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="valor">Valor:</label>
+                        <input type="number" class="form-control" id="valor" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                </form>
+
+
+
+
+            </div>
+    <script src="/sorveteria-main/js/criarTipoSorvete.js"></script>
+</body>
+</html>
