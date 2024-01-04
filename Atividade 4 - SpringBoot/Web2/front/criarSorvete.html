@@ -10,14 +10,12 @@
 
 
 <a href="index.html"><button type="submit" class="btn btn-primary">Voltar</button></a>
-<a href="sorvetes.html"><button class="btn btn-primary" >Gerencie seus Sorvete</button></a>
 
 <body class="container">
 
   <div id="step1" class="mt-5">
     <h2>Passo 1: Escolha o tipo de sorvete</h2>
     <select id="tipoSorvete" class="form-select mb-3">
-      <!-- Options serão preenchidos dinamicamente pelo JavaScript -->
     </select>
     <button onclick="proximoPasso()" class="btn btn-primary">Próximo</button>
   </div>
@@ -35,9 +33,8 @@
     <button onclick="confirmarEscolha()" class="btn btn-success">Confirmar</button>
   </div>
 
-  <!-- Adicione os scripts do Bootstrap -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="criarSorvete.js"></script>
+  <script src="/sorveteria-main/js/criarSorvete.js"></script>
 
 </body>
 </html>

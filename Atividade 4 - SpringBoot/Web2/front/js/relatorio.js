@@ -19,7 +19,7 @@ function exibirRelatorio(relatorio, divId) {
             html += '</tr>';
         });
     } else if (divId === 'relatorioDia') {
-        html += 'Dia</th><th>Quantidade Vendida</th></tr>';
+        html += 'Dia</th><th>Quantidade de sorvetes vendidos</th></tr>';
 
         relatorio.forEach(item => {
             html += '<tr>';
